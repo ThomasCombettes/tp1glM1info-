@@ -7,89 +7,77 @@ class GildedRose {
         this.items = items;
     }
 
+    public void SellIn_moins_1(Item item) {
+        item.sellIn = item.sellIn - 1;
+    }
+
+    public void quality_plus_1(Item item) {
+        if (item.quality < 50) {
+            item.quality = item.quality + 1;
+        }
+    }
+
+    public void quality_moins_1(Item item) {
+        if (item.quality > 0) {
+            item.quality = item.quality - 1;
+        }
+    }
+
+    
+
+
     public void updateQuality() {
         for(Item item : items) {
             switch (item.name) {
 
-                case "Sulfuras, Hand of Ragnaros" :
+                case "Conjured" :
+                    quality_plus_1(item);
+                    SellIn_moins_1(item);
+                    if(item.sellIn < 0) {
+                        quality_moins_1(item);
+                        quality_moins_1(item);
+                    }
                     break;
 
-                
                 case "Backstage passes to a TAFKAL80ETC concert" :
-                    objetif (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+                    quality_plus_1(item);
                     if (item.sellIn < 11) {
-                        objetif (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+                        quality_plus_1(item);
                     }
                     if (item.sellIn < 6) {
-                        objetif (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+                        quality_plus_1(item);
                     }
-                    subSellIn(item);
+                    SellIn_moins_1(item);
                     if (item.sellIn < 0) {
                         item.quality = 0;
                     }
                     break;
-
+                
                 case "Aged Brie" :
-                    objetif (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
-                    subSellIn(item);
+                    quality_plus_1(item);
+                    SellIn_moins_1(item);
                     if (item.sellIn < 0) {
-                        objetif (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
+                        quality_plus_1(item);
                     }
+                    break;
+                
+                case "Sulfuras, Hand of Ragnaros" :
                     break;
 
 
-                case "Conjured" :
-                    objetif (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
-                    subSellIn(item);
-                    if(item.sellIn < 0) {
-                        subQualityConjured(item);
-                    }
-                    break;
-
+                
                 default :
-                    subQuality(item);
-                    subSellIn(item);
+                    quality_moins_1(item);
+                    SellIn_moins_1(item);
                     if(item.sellIn < 0) {
-                        subQuality(item);
+                        quality_moins_1(item);
                     }
                     break;
             }
         }
     }
 
-    protected void addQuality(Item item) {
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
-    }
-
-    protected void subQuality(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
-    }
-
-    protected void subQualityConjured(Item item) {
-        if (item.quality > 0) {
-            item.quality = item.quality - 2;
-        }
-    }
-
-    protected void subSellIn(Item item) {
-        item.sellIn = item.sellIn - 1;
-    }
+    
 }
 
 
